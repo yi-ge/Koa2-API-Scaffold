@@ -7,14 +7,14 @@ module.exports = {
   extends: 'standard',
   plugins: [
     'html',
-    "promise"
+    'promise'
   ],
   env: {
-        "node": true
+        'node': true
   },
   rules: { // add your custom rules here
     // allow console
-    "no-console": 0,
+    'no-console': 0,
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await

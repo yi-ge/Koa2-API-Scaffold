@@ -8,7 +8,7 @@
 
 此脚手架只安装了一些和Koa2不冲突的搭建RESTful API Server的必要插件，附带每一个插件的说明。采用ESlint进行语法检查。
 
-因此脚手架主要提供RESTful API，故暂时不考虑前端静态资源处理。基本目录结构与vue-cli保持一致，可配合React、AngularJS、Vue.js等前端框架使用。在Cordova/PhoneGap中使用时需要开启跨域功能。
+因此脚手架主要提供RESTful API，故暂时不考虑前端静态资源处理，只提供静态资源访问的基本方法便于访问用户上传到服务器的图片等资源。基本目录结构与vue-cli保持一致，可配合React、AngularJS、Vue.js等前端框架使用。在Cordova/PhoneGap中使用时需要开启跨域功能。
 
 **免责声明：** 此脚手架仅为方便开发提供基础环境，任何人或组织均可随意克隆使用，使用引入的框架需遵循原作者规定的相关协议（框架列表及来源地址在下方）。采用此脚手架产生的任何后果请自行承担，本人不对此脚手架负任何法律责任，使用即代表同意此条。
 
@@ -22,7 +22,7 @@ $ git clone https://github.com/yi-ge/koa2-API-scaffold.git
 
 $ cd mv koa2-API-scaffold
 $ npm install
-$ npm run dev #可执行npm start跳过ESlint检查。
+$ npm run dev # 可执行npm start跳过ESlint检查。
 ```
 访问： http://127.0.0.1:3000/
 
@@ -37,7 +37,7 @@ $ rm -rf .git
 $ git init
 $ git remote add origin `您的git仓库地址`
 $ npm install
-$ npm run dev #可执行npm start跳过ESlint检查。
+$ npm run dev # 可执行npm start跳过ESlint检查。
 ```
 
 ## 调试说明
@@ -79,14 +79,10 @@ http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/
 ### Docker部署说明
 ```
 $ docker pull node
-$ docker run -itd --name RESTfulAPI -v "$PWD":/usr/src/app -w /usr/src/app node node ./dist/app.js
+$ docker run -itd --name RESTfulAPI -v '$PWD':/usr/src/app -w /usr/src/app node node ./dist/app.js
 ```
 
-通过
-```
-$ docker ps
-```
-查看是否运行成功及运行状态
+通过'docker ps'查看是否运行成功及运行状态
 
 ### Linux/Mac 直接后台运行生产环境代码
 有时候为了简单，我们也这样做：
@@ -94,7 +90,7 @@ $ docker ps
 $ nohup node ./dist/app.js > logs/out.log &
 ```
 
-查看运行状态（如果有"node app.js"出现则说明正在后台运行）：
+查看运行状态（如果有'node app.js'出现则说明正在后台运行）：
 ```
 $ ps aux|grep app.js
 ```
@@ -110,7 +106,7 @@ $ tail -f logs/out.log
 ```
 
 ### 配合Vue-cli部署说明
-Vue-cli（Vue2）运行"npm run build"后会在"dist"目录中生成所有静态资源文件。推荐使用Nginx处理静态资源以达最佳利用效果，然后通过上述任意一种方法部署RESTful API服务器。前后端是完全分离的，请注意Koa2 RESTful API Server项目中config/main.json里面的跨域配置。
+Vue-cli（Vue2）运行'npm run build'后会在'dist'目录中生成所有静态资源文件。推荐使用Nginx处理静态资源以达最佳利用效果，然后通过上述任意一种方法部署RESTful API服务器。前后端是完全分离的，请注意Koa2 RESTful API Server项目中config/main.json里面的跨域配置。
 
 推荐的Nginx配置文件：
 ```
@@ -150,23 +146,37 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 > 引入插件的版本将会持续更新
 
 引入的插件：  
-`` koa nodemon babel-cli babel-register babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-2 gulp gulp-eslint eslint eslint-config-standard eslint-friendly-formatter eslint-plugin-html eslint-plugin-promise ``
+`` koa@2 koa-bodyparser@next koa-router@next koa-session2 koa-static2 koa-compose require-directory babel-cli babel-register babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-2 gulp gulp-eslint eslint eslint-config-standard eslint-friendly-formatter eslint-plugin-html eslint-plugin-promise nodemailer promise-mysql ``
 
-"koa-bodyparser": "^3.2.0",
-"koa-compose": "^3.1.0",
-"koa-convert": "^1.2.0",
-"koa-favicon": "^2.0.0",
-"koa-json": "^1.1.3",
-"koa-logger": "^1.3.0",
-"koa-multer": "^1.0.0",
-"koa-router": "^7.0.1",
-"koa-session": "^3.3.1",
-"koa-static2": "^0.1.8",
-"koa-onerror": "^3.0.1",
+koa-multer': '^1.0.0',
 
-**koa**: HTTP框架  
+**koa2**: HTTP框架  
 &nbsp;Synopsis: HTTP framework.  
-&nbsp;From: https://github.com/koajs/koa  
+&nbsp;From: https://github.com/koajs/koa  v2   
+
+**koa-bodyparser**: body解析器  
+&nbsp;Synopsis: A body parser for koa, base on co-body. support json, form and text type body.  
+&nbsp;From: https://github.com/koajs/logger  
+
+**koa-router**: Koa路由  
+&nbsp;Synopsis: Router middleware for koa.  
+&nbsp;From: https://github.com/alexmingoia/koa-router/tree/master/  
+
+**koa-session2**: Session中间件  
+&nbsp;Synopsis: Middleware for Koa2 to get/set session.  
+&nbsp;From: https://github.com/Secbone/koa-session2  
+
+**koa-static2**: 静态资源中间件  
+&nbsp;Synopsis: Middleware for Koa2 to serve a folder under a name declared by user.  
+&nbsp;From: https://github.com/Secbone/koa-static2  
+
+**koa-compose**: 多个中间件组合成一个  
+&nbsp;Synopsis: Compose several middleware into one.  
+&nbsp;From: https://github.com/koajs/compose  
+
+**require-directory**: 递归遍历指定目录  
+&nbsp;Synopsis: Recursively iterates over specified directory.  
+&nbsp;From: https://github.com/troygoode/node-require-directory  
 
 **babel-cli**: Babel编译ES6代码为ES5代码  
 &nbsp;Synopsis: Babel is a JavaScript compiler, ES6 to ES5.  
@@ -201,7 +211,7 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 &nbsp;From: https://github.com/feross/eslint-config-standard
 
 **eslint-friendly-formatter**: 使得ESlint提示在Sublime Text或iterm2中更友好，Atom也有对应的ESlint插件。  
-&nbsp;Synopsis: A simple formatter/reporter for ESLint that's friendly with Sublime Text and iterm2 "click to open file" functionality  
+&nbsp;Synopsis: A simple formatter/reporter for ESLint that's friendly with Sublime Text and iterm2 'click to open file' functionality  
 &nbsp;From: https://github.com/royriojas/eslint-friendly-formatter
 
 **eslint-plugin-html**: 检查HTML文件中的JS代码规范  
@@ -214,13 +224,36 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 
 **eslint-plugin-promise**: ESlint依赖项  
 &nbsp;Synopsis: ESlint Rules for the Standard Linter.
-&nbsp;From: https://github.com/xjamundx/eslint-plugin-standard
+&nbsp;From: https://github.com/xjamundx/eslint-plugin-standard  
+
+**nodemailer**: 发送邮件  
+&nbsp;Synopsis: Send e-mails with Node.JS.  
+&nbsp;From: https://github.com/nodemailer/nodemailer
+
+**promise-mysql**: 操作MySQL数据库依赖  
+&nbsp;Synopsis: Promise Mysql.  
+&nbsp;From: https://github.com/lukeb-uk/node-promise-mysql
 
 支持Koa2的中间件列表：https://github.com/koajs/koa/wiki  
 
-其它经常配合Koa2的插件：  
+**其它经常配合Koa2的插件：**  
+
 **koa-nunjucks-2**:  
-一个好用的模版引擎，可用于前后端，nunjucks。https://github.com/mozilla/nunjucks
+一个好用的模版引擎，可用于前后端，nunjucks：https://github.com/mozilla/nunjucks
+
+**koa-favicon**:  
+Koa的favicon中间件：https://github.com/koajs/favicon  
+
+**koa-server-push**:  
+HTTP2推送中间件：https://github.com/silenceisgolden/koa-server-push  
+
+**koa-convert**: 转换旧的中间件支持Koa2  
+&nbsp;Synopsis: Convert koa generator-based middleware to promise-based middleware.  
+&nbsp;From: https://github.com/koajs/convert  
+
+**koa-logger**: 请求日志输出，需要配合上面的插件使用  
+&nbsp;Synopsis: Development style logger middleware for Koa.  
+&nbsp;From: https://github.com/koajs/logger
 
 ## 目录结构说明
 
@@ -240,13 +273,18 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 ├── config
 │   └── main.js             # 主配置文件（*谨防泄密！）
 ├── src                     # 源代码目录，编译后目标源代码位于 dist 目录
-│   ├── app.js              # koa 配置
-│   ├── config              # 配置目录
+│   ├── app.js              # 入口文件
+│   ├── plugin              # 插件目录
+│       └── smtp_sendemail  # 示例插件 - 发邮件
+│   ├── tool                # 工具目录
+│       ├── PluginLoader.js # 插件引入工具
+│       └── Common.js       # 示例插件 - 发邮件
+│   ├── lib                 # 库目录
 │   ├── controllers         # 控制器
-│   ├── index.js            # 入口文件
 │   ├── models              # 模型
 │   ├── routes              # 路由
-│   └── services            # service
+│   └── services            # 服务
+├── assets                  # 静态资源目录
 └── logs                    # 日志目录
 ```
 
@@ -255,15 +293,15 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 ### AngularJS (Ionic同)
 ```
 $http({
-	method: "post",
-	url: "http://localhost:3000/xxx",
-	data: {para1:"para1",para2:"para2"},
+	method: 'post',
+	url: 'http://localhost:3000/xxx',
+	data: {para1:'para1',para2:'para2'},
 	headers: {
 	    'Content-Type': 'application/x-www-form-urlencoded'
 	}
  }).success(function (data) {
  }).error(function (data) {
- });
+ })
  ```
 
 ### jQuery
@@ -271,27 +309,27 @@ $http({
 $.ajax({
   cache: false,
   type: 'POST',
-  url: "http://localhost:3000/xxx",
+  url: 'http://localhost:3000/xxx',
   data: {
       para1: para1
   },
   async: false,
-  dataType: "json",
+  dataType: 'json',
   success: function (result) {
   },
   error: function (err) {
-      console.log(err);
+      console.log(err)
   }
-});
+})
 
 // 上传文件
 //创建FormData对象
-var data = new FormData();
+var data = new FormData()
 //为FormData对象添加数据
 //
 $.each($('#inputfile')[0].files, function (i, file) {
-  data.append('upload_file', file);
-});
+  data.append('upload_file', file)
+})
 $.ajax({
   url: 'http://127.0.0.1:3000/api/upload_oss_img_demo',
   type: 'POST',
@@ -300,38 +338,38 @@ $.ajax({
   contentType: false,    //不可缺
   processData: false,    //不可缺
   success: function (data) {
-    console.log(data);
-    if (data.result == "ok") {
-      $("#zzzz").attr("src", data.img_url);
+    console.log(data)
+    if (data.result == 'ok') {
+      $('#zzzz').attr('src', data.img_url)
     }
 
   }
-});
+})
 ```
 
 ### MUI
 ```
-mui.ajax({ url: "http://localhost:3000/xxx", dataType: "json",
+mui.ajax({ url: 'http://localhost:3000/xxx', dataType: 'json',
   success: function(data){
 
   },
   error: function(data){
-      console.log("error!");
+      console.log('error!')
   }
-});
+})
 ```
 
 ### JavaScript
 ```
   var xhr = new XMLHttpRequest()
-  xhr.open("POST", "http://localhost:3000/xxx", true) //POST或GET，true（异步）或 false（同步）
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+  xhr.open('POST', 'http://localhost:3000/xxx', true) //POST或GET，true（异步）或 false（同步）
+  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
   xhr.withCredentials = true
   xhr.onreadystatechange = function () {
       if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) {
           var gotServices = JSON.parse(xhr.responseText)
       }else{
-          console.log("ajax失败了")
+          console.log('ajax失败了')
       }
   }
   xhr.send({para1: para1})
@@ -342,8 +380,8 @@ https://github.com/pagekit/vue-resource
 ```
 // global Vue object
 Vue.http.post('/someUrl', [body], {
-  headers: {"Content-type", "application/x-www-form-urlencoded"}
-}).then(successCallback, errorCallback);
+  headers: {'Content-type', 'application/x-www-form-urlencoded'}
+}).then(successCallback, errorCallback)
 ```
 
 ### fetch
@@ -365,7 +403,7 @@ fetch('/users', {
 })
 
 // 文件上传
-var input = document.querySelector('input[type="file"]')
+var input = document.querySelector('input[type='file']')
 
 var data = new FormData()
 data.append('file', input.files[0])
@@ -382,7 +420,7 @@ https://github.com/visionmedia/superagent
 ```
 request.post('/user')
  .set('Content-Type', 'application/json')
- .send('{"name":"tj","pet":"tobi"}')
+ .send('{'name':'tj','pet':'tobi'}')
  .end(callback)
 ```
 
@@ -391,6 +429,6 @@ request.post('/user')
 ## 彻底移除ESlint方法
 删除package.json的devDependencies中所有eslint开头的插件，根目录下的“.eslintignore、.eslintrc.js”文件，并且修改package.json的dev为：
 ```
-"dev": "gulp start"
+'dev': 'gulp start'
 ```
 删除gulpfile.js中的lint、eslint_start两个任务，并且把default改为“gulp.task('default', ['start']”。
