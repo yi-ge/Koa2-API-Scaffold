@@ -1,32 +1,23 @@
 import Koa2 from 'koa'
-import KoaBodyParser from 'koa-bodyparser'
+import KoaBody from 'koa-body'
 import KoaSession from 'koa-session2'
 import KoaStatic from 'koa-static2'
 import { SystemConfig } from '../config/main.js'
 import path from 'path'
-
 import MainRoutes from './routes/main-routes'
 import ErrorRoutes from './routes/error-routes'
-import PluginLoader from './tool/PluginLoader'
+// import PluginLoader from './tool/PluginLoader'
 
 const app = new Koa2()
-const BodyParser = new KoaBodyParser()
 const env = process.env.NODE_ENV || 'development' // Current mode
 
-app.use(BodyParser({
-  detectJSON: function (ctx) {
-    return /\.json$/i.test(ctx.path)
-  },
-  extendTypes: {
-    json: ['application/x-javascript'] // will parse application/x-javascript type body as a JSON string
-  },
-  onerror: function (err, ctx) {
-    ctx.throw('body parse error:' + err, 422)
-  }
+app.use(KoaBody({
+  multipart: true
+  // formidable: {uploadDir: path.join(__dirname, '../../../assets/uploads/')}
 }))  // Processing request
 .use(KoaStatic('assets', path.resolve(__dirname, '../assets'))) // Static resource
-.use(KoaSession({key: 'RESTfulAPI'})) // Set Session 生产环境务必随机设置一个值
-.use(PluginLoader(SystemConfig.System_plugin_path))
+.use(KoaSession({key: SystemConfig.Session_Key})) // Set Session
+// .use(PluginLoader(SystemConfig.System_plugin_path))
 .use((ctx, next) => {
   if (ctx.request.header.host.split(':')[0] === 'api.XXX.com' || ctx.request.header.host.split(':')[0] === '127.0.0.1') {
     ctx.set('Access-Control-Allow-Origin', '*')

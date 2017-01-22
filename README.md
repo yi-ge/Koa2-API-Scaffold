@@ -79,7 +79,7 @@ http://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/
 ### Docker部署说明
 ```
 $ docker pull node
-$ docker run -itd --name RESTfulAPI -v '$PWD':/usr/src/app -w /usr/src/app node node ./dist/app.js
+$ docker run -itd --name RESTfulAPI -v `pwd`:/usr/src/app -w /usr/src/app node node ./dist/app.js
 ```
 
 通过'docker ps'查看是否运行成功及运行状态
@@ -146,17 +146,15 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 > 引入插件的版本将会持续更新
 
 引入的插件：  
-`` koa@2 koa-bodyparser@next koa-router@next koa-session2 koa-static2 koa-compose require-directory babel-cli babel-register babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-2 gulp gulp-eslint eslint eslint-config-standard eslint-friendly-formatter eslint-plugin-html eslint-plugin-promise nodemailer promise-mysql ``
-
-koa-multer': '^1.0.0',
+`` koa@2 koa-body@2 koa-router@next koa-session2 koa-static2 koa-compose koa-multer require-directory babel-cli babel-register babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-2 gulp gulp-eslint eslint eslint-config-standard eslint-friendly-formatter eslint-plugin-html eslint-plugin-promise nodemailer promise-mysql ``
 
 **koa2**: HTTP框架  
 &nbsp;Synopsis: HTTP framework.  
 &nbsp;From: https://github.com/koajs/koa  v2   
 
-**koa-bodyparser**: body解析器  
-&nbsp;Synopsis: A body parser for koa, base on co-body. support json, form and text type body.  
-&nbsp;From: https://github.com/koajs/logger  
+**koa-body**: body解析器  
+&nbsp;Synopsis: A full-feature koa body parser middleware.  
+&nbsp;From: https://github.com/dlau/koa-body  
 
 **koa-router**: Koa路由  
 &nbsp;Synopsis: Router middleware for koa.  
@@ -172,7 +170,11 @@ koa-multer': '^1.0.0',
 
 **koa-compose**: 多个中间件组合成一个  
 &nbsp;Synopsis: Compose several middleware into one.  
-&nbsp;From: https://github.com/koajs/compose  
+&nbsp;From: https://github.com/koajs/compose    
+
+**koa-multer**: 处理数据中间件  
+&nbsp;Synopsis: Multer is a node.js middleware for handling multipart/form-data for koa.  
+&nbsp;From: https://github.com/koa-modules/multer  
 
 **require-directory**: 递归遍历指定目录  
 &nbsp;Synopsis: Recursively iterates over specified directory.  
@@ -232,7 +234,15 @@ koa-multer': '^1.0.0',
 
 **promise-mysql**: 操作MySQL数据库依赖  
 &nbsp;Synopsis: Promise Mysql.  
-&nbsp;From: https://github.com/lukeb-uk/node-promise-mysql
+&nbsp;From: https://github.com/lukeb-uk/node-promise-mysql  
+
+**sequelize**: 关系型数据库ORM  
+&nbsp;Synopsis: Sequelize is a promise-based ORM for Node.js.  
+&nbsp;From: https://github.com/sequelize/sequelize
+
+**mysql**: MySQL库  
+&nbsp;Synopsis: A pure node.js JavaScript Client implementing the MySql protocol.  
+&nbsp;From: https://github.com/mysqljs/mysql
 
 支持Koa2的中间件列表：https://github.com/koajs/koa/wiki  
 
@@ -254,6 +264,9 @@ HTTP2推送中间件：https://github.com/silenceisgolden/koa-server-push
 **koa-logger**: 请求日志输出，需要配合上面的插件使用  
 &nbsp;Synopsis: Development style logger middleware for Koa.  
 &nbsp;From: https://github.com/koajs/logger
+
+**koa-onerror**:  
+Koa的错误拦截中间件，需要配合上面的插件使用：https://github.com/koajs/onerror  
 
 ## 目录结构说明
 

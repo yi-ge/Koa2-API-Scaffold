@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { SendEmail } from '../../../config/main'
 
 // 发送Email（目前使用的是阿里云SMTP发送邮件）
 // receivers 目标邮箱，可以用英文逗号分隔多个。（我没试过）
@@ -10,11 +11,11 @@ import nodemailer from 'nodemailer'
 // info 是返回的消息，可能是结果的文本，也可能是对象。（这个错误不要暴露给用户）
 export let sendemail = (receivers, subject, text, html) => {
   return new Promise(function (resolve) {
-    let transporter = nodemailer.createTransport('smtp://postmaster%40abcd.com:password@smtp.abcd.com')
+    let transporter = nodemailer.createTransport('smtp://' + SendEmail.username + ':' + SendEmail.password + '@' + SendEmail.service)
 
     // setup e-mail data with unicode symbols
     let mailOptions = {
-      from: '"XX平台 👥" <postmaster@abcd.com>', // sender address
+      from: SendEmail.sender_address, // sender address
       to: receivers,
       subject: subject,
       text: text || 'Hello world 🐴', // plaintext body

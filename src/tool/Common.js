@@ -34,8 +34,8 @@ export let OptionFormat = (GetOptions) => {
 
 // 替换SQL字符串中的前缀
 export let SqlFormat = (str) => {
-  if (SystemConfig.mysql_prefix !== 'bm_') {
-    str = str.replace(/bm_/g, SystemConfig.mysql_prefix)
+  if (SystemConfig.mysql_prefix !== 'api_') {
+    str = str.replace(/api_/g, SystemConfig.mysql_prefix)
   }
   return str
 }
