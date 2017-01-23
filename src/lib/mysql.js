@@ -1,5 +1,5 @@
 import mysql from 'promise-mysql'
-import { SystemConfig } from '../config.js'
+import { SystemConfig } from '../config'
 import { SqlFormat } from '../tool/common_tool.js'
 
 let pool = mysql.createPool({

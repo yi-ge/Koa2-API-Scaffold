@@ -1,6 +1,6 @@
 import {
   SystemConfig
-} from '../config/main.js'
+} from '../config'
 
 // 截取字符串，多余的部分用...代替
 export let setString = (str, len) => {

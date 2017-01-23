@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize'
-import { SystemConfig } from '../config/main'
+import { SystemConfig } from '../config'
 
 export default new Sequelize(SystemConfig.mysql_database, SystemConfig.mysql_user, SystemConfig.mysql_password, {
   host: SystemConfig.mysql_host,
