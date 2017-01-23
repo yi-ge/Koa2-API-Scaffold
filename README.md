@@ -1,9 +1,9 @@
 Koa2 RESTful API 服务器脚手架
 =============================
 
-这是一个基于Koa2的轻量级Resultful API Server脚手架，支持ES6。
+这是一个基于Koa2的轻量级RESTful API Server脚手架，支持ES6。
 
-约定使用JSON格式传输数据，POST、PUT、DELET方法支持的Content-Type为application/x-www-form-urlencoded和multipart/form-data、application/json，可配置支持跨域。非上传文件推荐application/x-www-form-urlencoded。通常情况下返回application/json格式的JSON数据。
+约定使用JSON格式传输数据，POST、PUT、DELET方法支持的Content-Type为`application/x-www-form-urlencoded、multipart/form-data、application/json`可配置支持跨域。非上传文件推荐application/x-www-form-urlencoded。通常情况下返回application/json格式的JSON数据。
 
 可选用mongodb、redis非关系型数据库和PostgreSQL, MySQL, MariaDB, SQLite, MSSQL关系型数据库，考虑RESTful API Server的实际开发需要，这里通过sequelize.js作为ORM，同时提通过Promise执行SQL直接操作Mysql数据库的方法（不管什么方法，注意安全哦）。
 
