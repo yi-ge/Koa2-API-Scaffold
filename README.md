@@ -21,7 +21,7 @@ China大陆用户请自行优化网络。
 $ git clone https://github.com/yi-ge/koa2-API-scaffold.git
 
 $ cd mv koa2-API-scaffold
-$ npm install
+$ npm install # 安装依赖项
 $ npm run dev # 可执行npm start跳过ESlint检查。
 ```
 访问： http://127.0.0.1:3000/
