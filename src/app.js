@@ -12,7 +12,8 @@ const app = new Koa2()
 const env = process.env.NODE_ENV || 'development' // Current mode
 
 app.use(KoaBody({
-  multipart: true
+  multipart: true,
+  strict: false
   // formidable: {uploadDir: path.join(__dirname, '../../../assets/uploads/')}
 }))  // Processing request
 .use(KoaStatic('assets', path.resolve(__dirname, '../assets'))) // Static resource
