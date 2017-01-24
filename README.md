@@ -24,7 +24,7 @@ China大陆用户请自行优化网络。
 $ git clone https://github.com/yi-ge/koa2-API-scaffold.git
 
 $ cd mv koa2-API-scaffold
-$ npm install 
+$ npm install
 $ npm run dev # 可执行npm start跳过ESlint检查。
 ```
 
@@ -151,7 +151,7 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 > 引入插件的版本将会持续更新
 
 引入的插件：  
-`koa@2 koa-body@2 koa-router@next koa-session2 koa-static2 koa-compose koa-multer require-directory babel-cli babel-register babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-2 gulp gulp-eslint eslint eslint-config-standard eslint-friendly-formatter eslint-plugin-html eslint-plugin-promise nodemailer promise-mysql`
+`koa@2 koa-body@2 koa-router@next koa-session2 koa-static2 koa-compose require-directory babel-cli babel-register babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-2 gulp gulp-eslint eslint eslint-config-standard eslint-friendly-formatter eslint-plugin-html eslint-plugin-promise nodemailer promise-mysql`
 
 **koa2**: HTTP框架  
 &nbsp;Synopsis: HTTP framework.  
@@ -176,10 +176,6 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 **koa-compose**: 多个中间件组合成一个  
 &nbsp;Synopsis: Compose several middleware into one.  
 &nbsp;From: https://github.com/koajs/compose
-
-**koa-multer**: 处理数据中间件  
-&nbsp;Synopsis: Multer is a node.js middleware for handling multipart/form-data for koa.  
-&nbsp;From: https://github.com/koa-modules/multer
 
 **require-directory**: 递归遍历指定目录  
 &nbsp;Synopsis: Recursively iterates over specified directory.  
@@ -269,6 +265,10 @@ HTTP2推送中间件：https://github.com/silenceisgolden/koa-server-push
 
 **koa-onerror**:  
 Koa的错误拦截中间件，需要配合上面的插件使用：https://github.com/koajs/onerror
+
+**koa-multer**: 处理数据中间件  
+&nbsp;Synopsis: Multer is a node.js middleware for handling multipart/form-data for koa.  
+&nbsp;From: https://github.com/koa-modules/multer
 
 目录结构说明
 ------------
