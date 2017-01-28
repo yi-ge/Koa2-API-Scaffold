@@ -10,7 +10,6 @@ function getDirs (srcpath) {
 
 module.exports = (srcpath, filename = 'index.js') => {
   let plugins = {}
-
   let dirs = getDirs(srcpath)
   let list = []
 

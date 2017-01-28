@@ -12,7 +12,7 @@
   "dependencies": {
     "koa": "^2.0.0",
     "koa-body": "^2.0.0",
-    "koa-compose": "^2.5.1",
+    "koa-compose": "^3.2.1",
     "koa-router": "^7.0.1",
     "koa-session2": "^1.0.8",
     "koa-static2": "^0.1.8",

@@ -8,7 +8,7 @@ import {
 import path from 'path'
 import MainRoutes from './routes/main-routes'
 import ErrorRoutes from './routes/error-routes'
-// import PluginLoader from './tool/PluginLoader'
+import PluginLoader from './lib/PluginLoader'
 
 const app = new Koa2()
 const env = process.env.NODE_ENV || 'development' // Current mode
@@ -25,7 +25,7 @@ app
   .use(KoaSession({
     key: SystemConfig.Session_Key
   })) // Set Session
-  // .use(PluginLoader(SystemConfig.System_plugin_path))
+  .use(PluginLoader(SystemConfig.System_plugin_path))
   .use((ctx, next) => {
     if (ctx.request.header.host.split(':')[0] === 'api.XXX.com' || ctx.request.header.host.split(':')[0] === '127.0.0.1') {
       ctx.set('Access-Control-Allow-Origin', '*')

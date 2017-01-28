@@ -5,7 +5,7 @@ export let SystemConfig = {
   HTTP_server_host: 'localhost', // HTTP服务器地址,请勿添加"http://"
   HTTP_server_port: '3000', // HTTP服务器端口号
   System_country: 'zh-cn', // 所在国家的国家代码
-  System_plugin_path: path.join(__dirname, '../src/plugins'), // 插件路径
+  System_plugin_path: path.join(__dirname, './plugins'), // 插件路径
   Session_Key: 'RESTfulAPI', // 生产环境务必随机设置一个值
   mysql_host: 'localhost', // MySQL服务器地址
   mysql_user: 'root', // 数据库用户名

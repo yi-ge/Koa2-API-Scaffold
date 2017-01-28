@@ -1,6 +1,10 @@
 import nodemailer from 'nodemailer'
 import { SendEmail } from '../../config'
 
+export default () => {
+  console.log('ok')
+}
+
 // 发送Email（目前使用的是阿里云SMTP发送邮件）
 // receivers 目标邮箱，可以用英文逗号分隔多个。（我没试过）
 // subject 邮件标题
