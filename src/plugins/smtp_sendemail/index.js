@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer'
 import { SendEmail } from '../../config'
 
 export default () => {
-  console.log('ok')
+  // console.log('ok')
 }
 
 // 发送Email（目前使用的是阿里云SMTP发送邮件）
