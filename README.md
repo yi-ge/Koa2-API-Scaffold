@@ -450,6 +450,14 @@ request.post('/user')
  .end(callback)
 ```
 
+### request
+
+https://github.com/request/request
+
+```
+request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ... */ })
+```
+
 在React中可以将上述任意方法其置于componentDidMount()中，Vue.js同理。
 
 彻底移除ESlint方法
