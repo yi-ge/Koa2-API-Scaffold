@@ -9,8 +9,8 @@ if (process.env.npm_config_argv.indexOf('debug') > 0) {
 }
 
 gulp.task('lint', () => {
-  return gulp.src(['src/*.js', '!node_modules/**'])
-    .pipe(eslint({configFile: '.eslintrc.js'}))
+  return gulp.src(['src/**/*.js', '!node_modules/**'])
+    .pipe(eslint({configFile: './.eslintrc.js'}))
     .pipe(eslint.format(friendlyFormatter))
     // .pipe(eslint.failAfterError())
     .pipe(eslint.results(results => {

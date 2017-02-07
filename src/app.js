@@ -3,7 +3,7 @@ import KoaBody from 'koa-body'
 import KoaSession from 'koa-session2'
 import KoaStatic from 'koa-static2'
 import {
-  SystemConfig
+  System as SystemConfig
 } from './config'
 import path from 'path'
 import MainRoutes from './routes/main-routes'

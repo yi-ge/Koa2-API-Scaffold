@@ -1,9 +1,9 @@
 import Sequelize from 'sequelize'
-import { SystemConfig } from '../config'
+import { DB as DBConfig, System as SystemConfig } from '../config'
 
-export default new Sequelize(SystemConfig.mysql_database, SystemConfig.mysql_user, SystemConfig.mysql_password, {
-  host: SystemConfig.mysql_host,
-  dialect: 'mysql',
+export default new Sequelize(DBConfig.database, DBConfig.username, DBConfig.password, {
+  host: DBConfig.host,
+  dialect: SystemConfig.db_type,
   pool: {
     max: 50,
     min: 0,

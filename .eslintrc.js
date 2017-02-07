@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parserOptions: {
-    ecmaVersion: 6, //指定ECMAScript支持的版本，6为ES6
+    ecmaVersion: 8, //指定ECMAScript支持的版本，6为ES6，这里为了兼容async和await，设置为8
     sourceType: 'module'
   },
   extends: 'standard',
@@ -12,7 +12,7 @@ module.exports = {
   env: {
         'node': true
   },
-  rules: { // add your custom rules here
+  rules: {
     // allow console
     'no-console': 0,
     // allow paren-less arrow functions
