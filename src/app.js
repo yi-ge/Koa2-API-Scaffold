@@ -51,6 +51,6 @@ if (env === 'development') { // logger
 
 app.listen(SystemConfig.HTTP_server_port)
 
-console.log('Now start HTTP server on port ' + SystemConfig.HTTP_server_port + '...')
+console.log('Now start API server on port ' + SystemConfig.HTTP_server_port + '...')
 
 export default app
