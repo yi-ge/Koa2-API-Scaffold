@@ -471,9 +471,14 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 
 删除gulpfile.js中的lint、eslint_start两个任务，并且把default改为“gulp.task('default', ['start']”。
 
-## 更新说明
+更新说明
+--------
+
+*v0.0.5 2017年02月12日01:25:34*  
+1、修改了gulpfile.js文件，在更改文件热重启的时候无需检查全部文件，仅检查改动文件，开发速度更快。  
+2、修改了package.json中"start"项的值为"gulp nodemon"配合gulpfile.js文件的修改。
 
 *v0.0.4 2017年02月07日15:57:17*  
 1、修改了部分配置文件的配置方法，使之更为规范（老版本用户无须理会，对程序没有影响）。  
 2、修改了eslintrc.js文件中的JavaScript版本配置，改为ES8，兼容async、await。  
-3、修改gulpfile.js文件第12行，检查`src/**/*.js`文件。  
+3、修改gulpfile.js文件第12行，检查`src/**/*.js`文件。

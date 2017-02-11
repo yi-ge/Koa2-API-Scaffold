@@ -4,7 +4,7 @@
   "description": "Koa2 RESTful API 服务器的脚手架",
   "author": "轶哥 <a@wyr.me>",
   "scripts": {
-    "start": "gulp start",
+    "start": "gulp nodemon",
     "dev": "gulp",
     "build": "babel src -d dist",
     "production": "node dist/app.js"

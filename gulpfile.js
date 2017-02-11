@@ -8,7 +8,22 @@ if (process.env.npm_config_argv.indexOf('debug') > 0) {
   jsScript = 'node debug'
 }
 
-gulp.task('lint', () => {
+function lintOne (aims) {
+  console.log('ESlint:' + aims)
+  console.time('Finished eslint')
+  return gulp.src(aims)
+    .pipe(eslint({configFile: './.eslintrc.js'}))
+    .pipe(eslint.format(friendlyFormatter))
+    .pipe(eslint.results(results => {
+      // Called once for all ESLint results.
+      console.log(`- Total Results: ${results.length}`)
+      console.log(`- Total Warnings: ${results.warningCount}`)
+      console.log(`- Total Errors: ${results.errorCount}`)
+      console.timeEnd('Finished eslint')
+    }))
+}
+
+gulp.task('ESlint', () => {
   return gulp.src(['src/**/*.js', '!node_modules/**'])
     .pipe(eslint({configFile: './.eslintrc.js'}))
     .pipe(eslint.format(friendlyFormatter))
@@ -21,13 +36,16 @@ gulp.task('lint', () => {
     }))
 })
 
-gulp.task('eslint_start', ['lint'], function () {
+gulp.task('ESlint_nodemon', ['ESlint'], function () {
   var stream = nodemon({
     script: 'build/dev-server.js',
     execMap: {
       js: jsScript
     },
-    tasks: ['lint'],
+    tasks: function (changedFiles) {
+      lintOne(changedFiles)
+      return []
+    },
     verbose: true,
     ignore: ['build/*.js', 'dist/*.js', 'nodemon.json', '.git', 'node_modules/**/node_modules', 'gulpfile.js'],
     env: {
@@ -46,7 +64,7 @@ gulp.task('eslint_start', ['lint'], function () {
     })
 })
 
-gulp.task('start', function () {
+gulp.task('nodemon', function () {
   return nodemon({
     script: 'build/dev-server.js',
     execMap: {
@@ -61,6 +79,6 @@ gulp.task('start', function () {
   })
 })
 
-gulp.task('default', ['lint', 'eslint_start'], function () {
+gulp.task('default', ['ESlint', 'ESlint_nodemon'], function () {
   // console.log('ESlin检查完成')
 })
