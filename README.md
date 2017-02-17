@@ -473,6 +473,8 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 
 更新说明
 --------
+*v0.0.6 2017年02月17日21:17:23*  
+1、修改了src/lib/sequelize.js文件,添加了对utf8mb4的支持（要求MySQL版本>5.5）。
 
 *v0.0.5 2017年02月12日01:25:34*  
 1、修改了gulpfile.js文件，在更改文件热重启的时候无需检查全部文件，仅检查改动文件，开发速度更快。  
