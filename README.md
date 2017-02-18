@@ -473,6 +473,10 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 
 更新说明
 --------
+*v0.0.7 2017年02月18日19:01:48*  
+1、修改了index.js、config.js（详情请看github记录），完善了对跨域的处理。
+更新建议：对应github修改记录同步修改，方便将来部署调试。
+
 *v0.0.6 2017年02月17日21:17:23*  
 1、修改了src/lib/sequelize.js文件,添加了对utf8mb4的支持（要求MySQL版本>5.5）。
 

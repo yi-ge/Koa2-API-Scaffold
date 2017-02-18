@@ -27,12 +27,14 @@ app
   })) // Set Session
   .use(PluginLoader(SystemConfig.System_plugin_path))
   .use((ctx, next) => {
-    if (ctx.request.header.host.split(':')[0] === 'api.XXX.com' || ctx.request.header.host.split(':')[0] === '127.0.0.1') {
+    if (ctx.request.header.host.split(':')[0] === 'localhost' || ctx.request.header.host.split(':')[0] === '127.0.0.1') {
       ctx.set('Access-Control-Allow-Origin', '*')
-      ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-      ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')
-      ctx.set('Access-Control-Allow-Credentials', true) // 允许带上 cookie
+    } else {
+      ctx.set('Access-Control-Allow-Origin', SystemConfig.HTTP_server_host)
     }
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+    ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')
+    ctx.set('Access-Control-Allow-Credentials', true) // 允许带上 cookie
     return next()
   })
   .use(MainRoutes.routes())
@@ -49,8 +51,8 @@ if (env === 'development') { // logger
   })
 }
 
-app.listen(SystemConfig.HTTP_server_port)
+app.listen(SystemConfig.API_server_port)
 
-console.log('Now start API server on port ' + SystemConfig.HTTP_server_port + '...')
+console.log('Now start API server on port ' + SystemConfig.API_server_port + '...')
 
 export default app
