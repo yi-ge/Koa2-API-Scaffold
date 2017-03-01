@@ -473,6 +473,16 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 
 更新说明
 --------
+
+*v0.0.8 2017年03月01日23:03:44*  
+1、在src/app.js 18行 后添加了
+```
+    jsonLimit: '20mb',
+    formLimit: '10mb',
+    textLimit: '20mb',
+```
+以免表单过长导致提交失败。
+
 *v0.0.7 2017年02月18日19:01:48*  
 1、修改了index.js、config.js（详情请看github记录），完善了对跨域的处理。
 更新建议：对应github修改记录同步修改，方便将来部署调试。

@@ -17,6 +17,9 @@ app
   .use(KoaBody({
     multipart: true,
     strict: false,
+    jsonLimit: '20mb',
+    formLimit: '10mb',
+    textLimit: '20mb',
     formidable: {
       uploadDir: path.join(__dirname, '../assets/uploads')
     }
