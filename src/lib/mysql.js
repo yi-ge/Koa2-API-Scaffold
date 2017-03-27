@@ -1,20 +1,27 @@
 import mysql from 'promise-mysql'
-import { SystemConfig } from '../config'
-import { SqlFormat } from '../tool/common_tool.js'
+import { DB as DBConfig } from '../config'
 
 let pool = mysql.createPool({
   // connectionLimit: 4,     // 连接池最多可以创建的连接数
-  host: SystemConfig.mysql_host,
-  user: SystemConfig.mysql_user,
-  password: SystemConfig.mysql_password,
-  database: SystemConfig.mysql_database,
-  port: SystemConfig.mysql_port,
+  host: DBConfig.host,
+  user: DBConfig.username,
+  password: DBConfig.password,
+  database: DBConfig.database,
+  port: DBConfig.port,
   insecureAuth: true
 })
 
+// // 替换SQL字符串中的前缀
+// let SqlFormat = (str) => {
+//   if (SystemConfig.mysql_prefix !== 'yi_') {
+//     str = str.replace(/yi_/g, SystemConfig.mysql_prefix)
+//   }
+//   return str
+// }
+
 // 执行一行SQL语句并返回结果
 export let query = (sql) => {
-  return pool.query(SqlFormat(sql))
+  return pool.query(sql)
 }
 
 // 执行多行SQL语句并返回结果
