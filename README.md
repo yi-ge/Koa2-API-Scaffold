@@ -474,6 +474,10 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 更新说明
 --------
 
+*v0.0.9_1 2017年03月30日15:51:03*
+
+1.	完善了gulpfile.js，不是重要的更新。
+
 *v0.0.9 2017年03月27日17:25:58*
 
 1.	修改了`src/controllers/upload.js`文件，添加了上传文件示例代码。

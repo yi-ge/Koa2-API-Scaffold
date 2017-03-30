@@ -4,7 +4,7 @@ const nodemon = require('gulp-nodemon')
 const friendlyFormatter = require('eslint-friendly-formatter')
 
 var jsScript = 'node'
-if (process.env.npm_config_argv.indexOf('debug') > 0) {
+if (process.env.npm_config_argv !== undefined && process.env.npm_config_argv.indexOf('debug') > 0) {
   jsScript = 'node debug'
 }
 
