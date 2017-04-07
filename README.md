@@ -484,9 +484,10 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 ```
 依赖项                     原版本  建议版本 最新版本        项目
 eslint                   3.18.0  3.19.0  3.19.0  koa2-API-scaffold
-eslint-plugin-standard    2.1.1   2.3.1   3.0.1  koa2-API-scaffold
+eslint-plugin-standard    2.1.1   3.0.1   3.0.1  koa2-API-scaffold
 koa-router                7.1.0   7.1.1   7.1.1  koa2-API-scaffold
 promise-mysql             3.0.0   3.0.1   3.0.1  koa2-API-scaffold
+sequelize                3.30.2  3.30.4  3.30.4  koa2-API-scaffold
 ```
 
 *v0.0.9_1 2017年03月30日15:51:03*

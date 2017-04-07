@@ -20,7 +20,7 @@
     "nodemailer": "^2.7.2",
     "promise-mysql": "^3.0.1",
     "require-directory": "^2.1.1",
-    "sequelize": "^3.29.0"
+    "sequelize": "^3.30.4"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
