@@ -10,15 +10,17 @@
     "production": "node dist/app.js"
   },
   "dependencies": {
-    "koa": "^2.0.0",
+    "eslint": "^3.19.0",
+    "eslint-plugin-standard": "^2.3.1",
+    "koa": "^2.2.0",
     "koa-body": "^2.0.0",
     "koa-compose": "^3.2.1",
-    "koa-router": "^7.0.1",
+    "koa-router": "^7.1.1",
     "koa-session2": "^1.0.8",
     "koa-static2": "^0.1.8",
     "mysql": "^2.12.0",
     "nodemailer": "^2.7.2",
-    "promise-mysql": "^3.0.0",
+    "promise-mysql": "^3.0.1",
     "require-directory": "^2.1.1",
     "sequelize": "^3.29.0"
   },
