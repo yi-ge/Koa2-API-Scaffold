@@ -12,7 +12,5 @@ router
   .post('/api/:name', controllers.api.Post)
   .put('/api/:name', controllers.api.Put)
   .del('/api/:name', controllers.api.Delect)
-  .get('/zwj/name', controllers.zwj.Get)
-  .post('/zwj/name', controllers.zwj.Post)
 
 module.exports = router
