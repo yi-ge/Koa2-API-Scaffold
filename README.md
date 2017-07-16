@@ -3,7 +3,7 @@ Koa2 RESTful API 服务器脚手架
 
 这是一个基于Koa2的轻量级RESTful API Server脚手架，支持ES6。
 
-**注意：因升级Koa版本至2.2.0，为配合相应的依赖项，故需要Node.js版本大于等于v7.8.0，NPM大于等于v4.2.0。**
+**注意：因升级Koa版本至2.3.0，为配合相应的依赖项，故需要Node.js版本大于等于v8.0.0，NPM大于等于v5.0.0。**
 
 约定使用JSON格式传输数据，POST、PUT、DELET方法支持的Content-Type为`application/x-www-form-urlencoded、multipart/form-data、application/json`可配置支持跨域。非上传文件推荐application/x-www-form-urlencoded。通常情况下返回application/json格式的JSON数据。
 
@@ -153,7 +153,7 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 > 引入插件的版本将会持续更新
 
 引入的插件：  
-`koa@2 koa-body@2 koa-router@next koa-session2 koa-static2 koa-compose require-directory babel-cli babel-register babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-2 gulp gulp-eslint eslint eslint-config-standard eslint-friendly-formatter eslint-plugin-html eslint-plugin-promise nodemailer promise-mysql`
+`koa@2 koa-body@2 koa-router@next koa-static2 koa-compose require-directory babel-cli babel-register babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-2 gulp gulp-eslint eslint eslint-config-standard eslint-friendly-formatter eslint-plugin-html eslint-plugin-promise nodemailer promise-mysql 等`
 
 **koa2**: HTTP框架  
 &nbsp;Synopsis: HTTP framework.  
@@ -166,10 +166,6 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 **koa-router**: Koa路由  
 &nbsp;Synopsis: Router middleware for koa.  
 &nbsp;From: https://github.com/alexmingoia/koa-router/tree/master/
-
-**koa-session2**: Session中间件  
-&nbsp;Synopsis: Middleware for Koa2 to get/set session.  
-&nbsp;From: https://github.com/Secbone/koa-session2
 
 **koa-static2**: 静态资源中间件  
 &nbsp;Synopsis: Middleware for Koa2 to serve a folder under a name declared by user.  
@@ -247,6 +243,10 @@ $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ng
 支持Koa2的中间件列表：https://github.com/koajs/koa/wiki
 
 **其它经常配合Koa2的插件：**
+
+**koa-session2**: Session中间件  
+&nbsp;Synopsis: Middleware for Koa2 to get/set session.  
+&nbsp;From: https://github.com/Secbone/koa-session2
 
 **koa-nunjucks-2**:  
 一个好用的模版引擎，可用于前后端，nunjucks：https://github.com/mozilla/nunjucks
@@ -475,6 +475,12 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 
 更新说明
 --------
+
+*v0.2 2017年07月16日22:48:34*
+
+1.	升级koa为2.3.0版本。
+2.	将koa-session2替换为koa-jwt，添加了jsonwebtoken。
+3.	升级了以下依赖的版本： koa@2.3.0, koa-body@2.3.0, koa-router@7.2.1, babel-cli@6.24.1, babel-preset-es2015@6.24.1, babel-preset-stage-2@6.24.1, babel-register@6.24.1, eslint-plugin-promise@3.5.0, koa-compose@4.0.0, koa-session2@2.2.4, nodemailer@4.0.1, sequelize@4.3.2, eslint@4.2.0, eslint-config-standard@10.2.1, eslint-friendly-formatter@3.0.0, eslint-plugin-html@3.1.0, gulp-eslint@4.0.0, koa-logger@3.0.1
 
 *v0.1 2017年04月07日11:46:02*
 
