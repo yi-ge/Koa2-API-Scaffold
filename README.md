@@ -7,17 +7,15 @@ Koa2 RESTful API 服务器脚手架
 
 约定使用JSON格式传输数据，POST、PUT、DELET方法支持的Content-Type为`application/x-www-form-urlencoded、multipart/form-data、application/json`可配置支持跨域。非上传文件推荐application/x-www-form-urlencoded。通常情况下返回application/json格式的JSON数据。
 
-可选用mongodb、redis非关系型数据库和PostgreSQL, MySQL, MariaDB, SQLite, MSSQL关系型数据库，考虑RESTful API Server的实际开发需要，这里通过sequelize.js作为ORM，同时提通过Promise执行SQL直接操作Mysql数据库的方法（不管什么方法，注意安全哦）。
+可选用redis等非关系型数据库。考虑RESTful API Server的实际开发需要，这里通过sequelize.js作为PostgreSQL, MySQL, MariaDB, SQLite, MSSQL关系型数据库的ORM，如无需关系型ORM，`npm remove sequelize -S`，然后删除`src/lib/sequelize.js`文件。
 
 此脚手架只安装了一些和Koa2不冲突的搭建RESTful API Server的必要插件，附带每一个插件的说明。采用ESlint进行语法检查。
 
 因此脚手架主要提供RESTful API，故暂时不考虑前端静态资源处理，只提供静态资源访问的基本方法便于访问用户上传到服务器的图片等资源。基本目录结构与vue-cli保持一致，可配合React、AngularJS、Vue.js等前端框架使用。在Cordova/PhoneGap中使用时需要开启跨域功能。
 
-**免责声明：** 此脚手架仅为方便开发提供基础环境，任何人或组织均可随意克隆使用，使用引入的框架需遵循原作者规定的相关协议（框架列表及来源地址在下方）。采用此脚手架产生的任何后果请自行承担，本人不对此脚手架负任何法律责任，使用即代表同意此条。
+**免责声明：** 此脚手架仅为方便开发提供基础环境，任何人或组织均可随意克隆使用，使用引入的框架需遵循原作者规定的相关协议（部分框架列表及来源地址在下方）。采用此脚手架产生的任何后果请自行承担，本人不对此脚手架负任何法律责任，使用即代表同意此条。
 
 目前暂未加入软件测试模块，下一个版本会加入该功能并提供集成方案。
-
-China大陆用户请自行优化网络。
 
 开发使用说明
 ------------
@@ -305,6 +303,48 @@ Koa的错误拦截中间件，需要配合上面的插件使用：https://github
 └── logs                    # 日志目录
 ```
 
+集成NUXT请求时身份认证说明
+--------------------------
+
+```
+import Vue from 'vue'
+import axios from 'axios'
+
+const DevBaseUrl = 'http://127.0.0.1:3000'
+const ProdBashUrl = 'https://api.xxx.com'
+
+let config = {
+  baseURL: process.env.NODE_ENV !== 'production' ? DevBaseUrl : ProdBashUrl // 配置API接口地址
+}
+
+if (process.env.VUE_ENV !== 'server') {
+  let token = getToken() // 此函数自行实现
+  if (token) {
+    config.headers = {Authorization: 'Bearer ' + token}
+  }
+}
+
+let request = axios.create(config)
+
+// http request 拦截器
+axios.interceptors.request.use(
+  (config) => {
+    if (window) {
+      let token = getToken()
+      if (token) { // 判断是否存在token，如果存在的话，则每个http header都加上token
+        config.headers.Authorization = `Bearer ${token}`
+      }
+    }
+    return config
+  },
+  (err) => {
+    return Promise.reject(err)
+  }
+)
+
+Vue.prototype.$request = request
+```
+
 各类主流框架调用RESTful API的示例代码（仅供参考）
 -------------------------------------------------
 
@@ -480,7 +520,7 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 
 1.	升级koa为2.3.0版本。
 2.	将koa-session2替换为koa-jwt，添加了jsonwebtoken。
-3.	升级了以下依赖的版本： koa@2.3.0, koa-body@2.3.0, koa-router@7.2.1, babel-cli@6.24.1, babel-preset-es2015@6.24.1, babel-preset-stage-2@6.24.1, babel-register@6.24.1, eslint-plugin-promise@3.5.0, koa-compose@4.0.0, koa-session2@2.2.4, nodemailer@4.0.1, sequelize@4.3.2, eslint@4.2.0, eslint-config-standard@10.2.1, eslint-friendly-formatter@3.0.0, eslint-plugin-html@3.1.0, gulp-eslint@4.0.0, koa-logger@3.0.1
+3.	升级了以下依赖的版本： koa@2.3.0, koa-body@2.3.0, koa-router@7.2.1, babel-cli@6.24.1, babel-preset-es2015@6.24.1, babel-preset-stage-2@6.24.1, babel-register@6.24.1, eslint-plugin-promise@3.5.0, koa-compose@4.0.0, nodemailer@4.0.1, sequelize@4.3.2, eslint@4.2.0, eslint-config-standard@10.2.1, eslint-friendly-formatter@3.0.0, eslint-plugin-html@3.1.0, gulp-eslint@4.0.0, koa-logger@3.0.1
 
 *v0.1 2017年04月07日11:46:02*
 
