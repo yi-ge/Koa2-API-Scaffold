@@ -516,6 +516,11 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 更新说明
 --------
 
+*v0.2.1 2017年07月19日19:38:19*
+
+1.	移除MySQL模块（重复了）。
+2.	添加更详细的说明。
+
 *v0.2 2017年07月16日22:48:34*
 
 1.	升级koa为2.3.0版本。
