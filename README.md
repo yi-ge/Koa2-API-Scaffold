@@ -516,6 +516,10 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 更新说明
 --------
 
+*v0.2.4 2017年12月01日14:16:03*
+
+1.	升级依赖项版本（node9.2.0）。
+
 *v0.2.3 2017年10月23日23:26:56*
 
 1.	升级依赖项版本（node8.7.0）。
