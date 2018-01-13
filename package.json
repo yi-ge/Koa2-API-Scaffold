@@ -29,7 +29,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "eslint": "^4.9.0",
-    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-plugin-html": "^4.0.1",
     "eslint-plugin-import": "^2.8.0",

@@ -3,7 +3,7 @@ Koa2 RESTful API 服务器脚手架
 
 这是一个基于Koa2的轻量级RESTful API Server脚手架，支持ES6。
 
-**注意：因升级Koa版本至2.3.0，为配合相应的依赖项，故需要Node.js版本大于等于v8.0.0，NPM大于等于v5.0.0。**
+**注意：因升级Koa版本至2.3.0，为配合相应的依赖项，故需要Node.js版本大于等于v8.0.0（建议v9.3.0），NPM大于等于v5.0.0。建议使用yarn代替npm。**
 
 约定使用JSON格式传输数据，POST、PUT、DELET方法支持的Content-Type为`application/x-www-form-urlencoded、multipart/form-data、application/json`可配置支持跨域。非上传文件推荐application/x-www-form-urlencoded。通常情况下返回application/json格式的JSON数据。
 
@@ -144,6 +144,141 @@ Docker中Nginx运行命令(将上述配置文件任意命名放置于nginx_confi
 ```
 $ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d nginx
 ```
+
+### 关于Token使用的特别说明（JWT身份认证）
+`src\app.js`目录中有一行代码：
+```.use(jwt({ secret: publicKey }).unless({ path: [/^\/public|\/user\/login|\/assets/] }))```
+
+在path里面的开头路径则不进行身份认证，否则都将进行鉴权。
+
+前端处理方案：
+```
+import axios from "axios"
+import { getToken } from "./tool"
+
+const DevBaseUrl = "http://127.0.0.1:8080"
+const ProdBashUrl = "https://xxx.xxx"
+
+let config = {
+  baseURL: process.env.NODE_ENV !== "production" ? DevBaseUrl : ProdBashUrl // 配置API接口地址
+}
+
+let token = getToken()
+if (token) {
+  config.headers = { Authorization: "Bearer " + token }
+}
+
+let request = axios.create(config)
+
+// http request 拦截器
+axios.interceptors.request.use(
+  config => {
+    if (window) {
+      let token = getToken()
+      if (token) {
+        // 判断是否存在token，如果存在的话，则每个http header都加上token
+        config.headers.Authorization = `Bearer ${token}`
+      }
+    }
+    // if (config.method === 'get') {
+    //   config.url = config.url + 'timestamp=' + Date.now().toString()
+    // }
+    return config
+  },
+  err => {
+    return Promise.reject(err)
+  }
+)
+
+export default request
+```
+
+`tool.js`文件
+```
+
+// 写 cookies
+export let setCookie = function setCookie(name, value, time) {
+  if (time) {
+    let strsec = getsec(time);
+    let exp = new Date();
+    exp.setTime(exp.getTime() + parseInt(strsec));
+    document.cookie = name +
+      "=" +
+      escape(value) +
+      ";expires=" +
+      exp.toGMTString();
+  } else {
+    document.cookie = name + "=" + escape(value);
+  }
+};
+
+// 读 cookies
+export let getCookie = function(name) {
+  let reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+  let arr = document.cookie.match(reg);
+  return arr ? unescape(arr[2]) : null;
+};
+
+// 删 cookies
+export let delCookie = function(name) {
+  var exp = new Date();
+  exp.setTime(exp.getTime() - 1);
+  var cval = getCookie(name);
+  if (cval != null) {
+    document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+  }
+};
+
+// 获取Token
+export let getToken = function() {
+  if (window.sessionStorage && window.sessionStorage.Bearer) {
+    return window.sessionStorage.Bearer;
+  } else if (window.localStorage && window.localStorage.Bearer) {
+    return window.localStorage.Bearer;
+  } else if (window.document.cookie) {
+    return getCookie("Bearer");
+  }
+};
+
+// 设置Token
+export let setToken = function(token, rememberTime) {
+  if (window.sessionStorage) {
+    window.sessionStorage.Bearer = token;
+  }
+
+  if ((rememberTime && window.localStorage) || !window.sessionStorage) {
+    window.localStorage.Bearer = token;
+  }
+
+  if (
+    window.document.cookie && !window.sessionStorage && !window.localStorage
+  ) {
+    if (rememberTime) {
+      setCookie("Bearer", token, rememberTime);
+    } else {
+      setCookie("Bearer", token);
+    }
+  }
+};
+
+// 删除Token
+export let delToken = function() {
+  if (window.sessionStorage && window.sessionStorage.Bearer) {
+    window.sessionStorage.removeItem("Bearer");
+  }
+
+  if (window.localStorage && window.localStorage.Bearer) {
+    window.localStorage.removeItem("Bearer");
+  }
+
+  if (window.document.cookie) {
+    delCookie("Bearer");
+  }
+};
+```
+
+大概原理：
+通过某个API（通常是登录API）获取成功后的Token，存于本地，然后每次请求的时候在Header带上`Authorization: "Bearer " + token`，通常情况下无需担心本地Token被破解。
 
 引入插件介绍
 ------------
@@ -515,6 +650,11 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 
 更新说明
 --------
+
+*v0.2.5 2018年01月13日10:37:29*
+
+1.	升级依赖项版本（node9.3.0）。
+2.	添加了Token使用说明。
 
 *v0.2.4 2017年12月01日14:16:03*
 
