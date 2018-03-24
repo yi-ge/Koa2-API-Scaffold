@@ -3,7 +3,7 @@ Koa2 RESTful API 服务器脚手架
 
 这是一个基于Koa2的轻量级RESTful API Server脚手架，支持ES6。
 
-**注意：因升级Koa版本至2.3.0，为配合相应的依赖项，故需要Node.js版本大于等于v8.0.0（建议v9.3.0），NPM大于等于v5.0.0。建议使用yarn代替npm。**
+**注意：因升级Koa版本至2.3.0，为配合相应的依赖项，故需要Node.js版本大于等于v8.0.0（建议v9.9.0），NPM大于等于v5.0.0。建议使用yarn代替npm。**
 
 约定使用JSON格式传输数据，POST、PUT、DELET方法支持的Content-Type为`application/x-www-form-urlencoded、multipart/form-data、application/json`可配置支持跨域。非上传文件推荐application/x-www-form-urlencoded。通常情况下返回application/json格式的JSON数据。
 
@@ -15,7 +15,7 @@ Koa2 RESTful API 服务器脚手架
 
 **免责声明：** 此脚手架仅为方便开发提供基础环境，任何人或组织均可随意克隆使用，使用引入的框架需遵循原作者规定的相关协议（部分框架列表及来源地址在下方）。采用此脚手架产生的任何后果请自行承担，本人不对此脚手架负任何法律责任，使用即代表同意此条。
 
-目前暂未加入软件测试模块，下一个版本会加入该功能并提供集成方案。
+目前暂未加入软件测试模块，下一个版本会加入该功能并提供集成方案。建议自行集成jest。
 
 开发使用说明
 ------------
@@ -650,6 +650,10 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 
 更新说明
 --------
+
+*v0.2.6 2018年03月24日22:16:43*
+
+1.	升级依赖项版本（node9.9.0）。
 
 *v0.2.5 2018年01月13日10:37:29*
 
