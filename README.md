@@ -17,6 +17,9 @@ Koa2 RESTful API 服务器脚手架
 
 目前暂未加入软件测试模块，下一个版本会加入该功能并提供集成方案。建议自行集成jest。
 
+
+基于Vue 2，Webpack 4，Koa 2的SSR脚手架：[https://github.com/yi-ge/Vue-SSR-Koa2-Scaffold](https://github.com/yi-ge/Vue-SSR-Koa2-Scaffold)。
+
 开发使用说明
 ------------
 
