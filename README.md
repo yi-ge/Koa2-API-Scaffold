@@ -3,7 +3,7 @@ Koa2 RESTful API 服务器脚手架
 
 这是一个基于Koa2的轻量级RESTful API Server脚手架，支持ES6。
 
-**注意：因升级Koa版本至2.3.0，为配合相应的依赖项，故需要Node.js版本大于等于v8.0.0（建议v9.9.0），NPM大于等于v5.0.0。建议使用yarn代替npm。**
+**注意：**因升级Koa版本至2.3.0+，为配合相应的依赖项，故需要Node.js版本大于等于v8.0.0（建议v11.13.0），NPM大于等于v5.0.0。建议使用yarn代替npm。
 
 约定使用JSON格式传输数据，POST、PUT、DELET方法支持的Content-Type为`application/x-www-form-urlencoded、multipart/form-data、application/json`可配置支持跨域。非上传文件推荐application/x-www-form-urlencoded。通常情况下返回application/json格式的JSON数据。
 
@@ -11,19 +11,18 @@ Koa2 RESTful API 服务器脚手架
 
 此脚手架只安装了一些和Koa2不冲突的搭建RESTful API Server的必要插件，附带每一个插件的说明。采用ESlint进行语法检查。
 
-因此脚手架主要提供RESTful API，故暂时不考虑前端静态资源处理，只提供静态资源访问的基本方法便于访问用户上传到服务器的图片等资源。基本目录结构与vue-cli保持一致，可配合React、AngularJS、Vue.js等前端框架使用。在Cordova/PhoneGap中使用时需要开启跨域功能。
+因此脚手架主要提供RESTful API，故暂时不考虑前端静态资源处理，只提供静态资源访问的基本方法便于访问用户上传到服务器的图片等资源。基本目录结构与vue-cli保持一致，可配合React、AngularJS、Vue.js等前端框架使用。在Cordova/PhoneGap、Electron中使用时需要开启跨域功能。
 
 **免责声明：** 此脚手架仅为方便开发提供基础环境，任何人或组织均可随意克隆使用，使用引入的框架需遵循原作者规定的相关协议（部分框架列表及来源地址在下方）。采用此脚手架产生的任何后果请自行承担，本人不对此脚手架负任何法律责任，使用即代表同意此条。
 
 目前暂未加入软件测试模块，下一个版本会加入该功能并提供集成方案。建议自行集成jest。
 
-
-基于Vue 2，Webpack 4，Koa 2的SSR脚手架：[https://github.com/yi-ge/Vue-SSR-Koa2-Scaffold](https://github.com/yi-ge/Vue-SSR-Koa2-Scaffold)。
+**基于Vue 2，Webpack 4，Koa 2的SSR脚手架：**[https://github.com/yi-ge/Vue-SSR-Koa2-Scaffold](https://github.com/yi-ge/Vue-SSR-Koa2-Scaffold)。
 
 开发使用说明
 ------------
 
-```
+```bash
 $ git clone https://github.com/yi-ge/koa2-API-scaffold.git
 
 $ cd mv koa2-API-scaffold
@@ -653,6 +652,10 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 
 更新说明
 --------
+*v1.0.0 2019年04月07日21:19:59*
+
+1. 升级依赖项版本（node11.13.0）。
+2. 添加Jest。
 
 *v0.2.6 2018年03月24日22:16:43*
 

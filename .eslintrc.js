@@ -1,7 +1,8 @@
 module.exports = {
   root: true,
   parserOptions: {
-    ecmaVersion: 8, //指定ECMAScript支持的版本，6为ES6，这里为了兼容async和await，设置为8
+    parser: 'babel-eslint',
+    ecmaVersion: 2017, //指定ECMAScript支持的版本，6为ES6，这里为了兼容async和await，设置为2017
     sourceType: 'module'
   },
   extends: 'standard',
@@ -10,7 +11,7 @@ module.exports = {
     'promise'
   ],
   env: {
-        'node': true
+    'node': true
   },
   rules: {
     // allow console

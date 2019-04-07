@@ -12,7 +12,7 @@ function lintOne (aims) {
   console.log('ESlint:' + aims)
   console.time('Finished eslint')
   return gulp.src(aims)
-    .pipe(eslint({configFile: './.eslintrc.js'}))
+    .pipe(eslint({ configFile: './.eslintrc.js' }))
     .pipe(eslint.format(friendlyFormatter))
     .pipe(eslint.results(results => {
       // Called once for all ESLint results.
@@ -25,7 +25,7 @@ function lintOne (aims) {
 
 gulp.task('ESlint', () => {
   return gulp.src(['src/**/*.js', '!node_modules/**'])
-    .pipe(eslint({configFile: './.eslintrc.js'}))
+    .pipe(eslint({ configFile: './.eslintrc.js' }))
     .pipe(eslint.format(friendlyFormatter))
     // .pipe(eslint.failAfterError())
     .pipe(eslint.results(results => {
@@ -36,7 +36,7 @@ gulp.task('ESlint', () => {
     }))
 })
 
-gulp.task('ESlint_nodemon', ['ESlint'], function () {
+gulp.task('ESlint_nodemon', gulp.series('ESlint', function () {
   var stream = nodemon({
     script: 'build/dev-server.js',
     execMap: {
@@ -62,7 +62,7 @@ gulp.task('ESlint_nodemon', ['ESlint'], function () {
       console.error('Application has crashed!\n')
       // stream.emit('restart', 20)  // restart the server in 20 seconds
     })
-})
+}))
 
 gulp.task('nodemon', function () {
   return nodemon({
@@ -79,6 +79,6 @@ gulp.task('nodemon', function () {
   })
 })
 
-gulp.task('default', ['ESlint', 'ESlint_nodemon'], function () {
+gulp.task('default', gulp.series('ESlint', 'ESlint_nodemon', function () {
   // console.log('ESlin检查完成')
-})
+}))
