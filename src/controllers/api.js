@@ -22,9 +22,9 @@ export let Put = (ctx) => {
   }
 }
 
-export let Delect = (ctx) => {
+export let Delete = (ctx) => {
   ctx.body = {
-    result: 'delect',
+    result: 'delete',
     name: ctx.params.name,
     para: ctx.request.body
   }
