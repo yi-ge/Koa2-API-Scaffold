@@ -652,6 +652,10 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 
 更新说明
 --------
+*v1.0.1 2019年06月02日21:54:00*
+
+1. 添加Dockerfile
+
 *v1.0.0 2019年04月07日21:19:59*
 
 1. 升级依赖项版本（node11.13.0）。
