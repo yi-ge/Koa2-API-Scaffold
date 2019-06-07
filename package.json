@@ -1,6 +1,6 @@
 {
   "name": "koa2-api-scaffold",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Koa2 RESTful API 服务器的脚手架",
   "author": "yi-ge <a@wyr.me>",
   "license": "WTFPL",
