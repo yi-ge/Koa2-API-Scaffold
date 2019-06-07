@@ -1,2 +1,9 @@
-let requireDirectory = require('require-directory')
-module.exports = requireDirectory(module)
+import upload from './upload'
+import * as api from './api'
+import * as auth from './auth'
+
+export default {
+  upload,
+  api,
+  auth
+}
