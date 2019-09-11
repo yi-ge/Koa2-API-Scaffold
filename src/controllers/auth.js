@@ -13,9 +13,9 @@ const publicKey = fs.readFileSync(path.join(__dirname, '../../publicKey.pub'))
  * 检查授权是否合法
  */
 const CheckAuth = (ctx, next) => {
-  let token = ctx.request.header.authorization
+  const token = ctx.request.header.authorization
   try {
-    let decoded = jwt.verify(token.substr(7), publicKey)
+    const decoded = jwt.verify(token.substr(7), publicKey)
     if (decoded.userInfo) {
       return {
         status: 1,

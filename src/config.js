@@ -1,7 +1,7 @@
 import path from 'path'
 
 // 系统配置
-export let System = {
+export const System = {
   API_server_type: 'http://', // API服务器协议类型,包含"http://"或"https://"
   API_server_host: 'localhost', // API服务器暴露的域名地址,请勿添加"http://"
   API_server_port: '3000', // API服务器监听的端口号
@@ -14,7 +14,7 @@ export let System = {
   db_type: 'mysql' // 数据库类型
 }
 
-export let DB = {
+export const DB = {
   host: 'localhost', // 服务器地址
   port: 3306, // 数据库端口号
   username: 'admin', // 数据库用户名
@@ -23,7 +23,7 @@ export let DB = {
   prefix: 'api_' // 默认"api_"
 }
 
-export let SendEmail = {
+export const SendEmail = {
   service: 'smtp.abcd.com', // SMTP服务提供商域名
   username: 'postmaster%40abcd.com', // 用户名/用户邮箱
   password: 'password', // 邮箱密码

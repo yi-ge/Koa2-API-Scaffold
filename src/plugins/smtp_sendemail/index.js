@@ -13,12 +13,12 @@ export default () => {
 // 返回
 // result 200是成功，500是失败
 // info 是返回的消息，可能是结果的文本，也可能是对象。（这个错误不要暴露给用户）
-export let sendemail = (receivers, subject, text, html) => {
+export const sendemail = (receivers, subject, text, html) => {
   return new Promise(function (resolve) {
-    let transporter = nodemailer.createTransport('smtp://' + SendEmail.username + ':' + SendEmail.password + '@' + SendEmail.service)
+    const transporter = nodemailer.createTransport('smtp://' + SendEmail.username + ':' + SendEmail.password + '@' + SendEmail.service)
 
     // setup e-mail data with unicode symbols
-    let mailOptions = {
+    const mailOptions = {
       from: SendEmail.sender_address, // sender address
       to: receivers,
       subject: subject,

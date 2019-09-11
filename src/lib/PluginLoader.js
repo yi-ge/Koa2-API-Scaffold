@@ -9,11 +9,11 @@ function getDirs (srcpath) {
 }
 
 module.exports = (srcpath, filename = 'index.js') => {
-  let plugins = {}
-  let dirs = getDirs(srcpath)
-  let list = []
+  const plugins = {}
+  const dirs = getDirs(srcpath)
+  const list = []
 
-  for (let name of dirs) {
+  for (const name of dirs) {
     let fn = require(path.join(srcpath, name, filename))
 
     if (typeof fn !== 'function' && typeof fn.default === 'function') {
