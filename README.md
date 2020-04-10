@@ -151,44 +151,44 @@ docker run -itd -p 80:80 -p 443:443 -v `pwd`/nginx_config:/etc/nginx/conf.d ngin
 前端处理方案：
 
 ```javascript
-import axios from 'axios'
-import { getToken } from './tool'
+import axios from "axios";
+import { getToken } from "./tool";
 
-const DevBaseUrl = 'http://127.0.0.1:8080'
-const ProdBashUrl = 'https://xxx.xxx'
+const DevBaseUrl = "http://127.0.0.1:8080";
+const ProdBashUrl = "https://xxx.xxx";
 
 let config = {
-  baseURL: process.env.NODE_ENV !== 'production' ? DevBaseUrl : ProdBashUrl // 配置API接口地址
-}
+  baseURL: process.env.NODE_ENV !== "production" ? DevBaseUrl : ProdBashUrl, // 配置API接口地址
+};
 
-let token = getToken()
+let token = getToken();
 if (token) {
-  config.headers = { Authorization: 'Bearer ' + token }
+  config.headers = { Authorization: "Bearer " + token };
 }
 
-let request = axios.create(config)
+let request = axios.create(config);
 
 // http request 拦截器
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     if (window) {
-      let token = getToken()
+      let token = getToken();
       if (token) {
         // 判断是否存在token，如果存在的话，则每个http header都加上token
-        config.headers.Authorization = `Bearer ${token}`
+        config.headers.Authorization = `Bearer ${token}`;
       }
     }
     // if (config.method === 'get') {
     //   config.url = config.url + 'timestamp=' + Date.now().toString()
     // }
-    return config
+    return config;
   },
-  err => {
-    return Promise.reject(err)
+  (err) => {
+    return Promise.reject(err);
   }
-)
+);
 
-export default request
+export default request;
 ```
 
 `tool.js`文件
@@ -197,52 +197,52 @@ export default request
 // 写 cookies
 export let setCookie = function setCookie(name, value, time) {
   if (time) {
-    let strsec = getsec(time)
-    let exp = new Date()
-    exp.setTime(exp.getTime() + parseInt(strsec))
+    let strsec = getsec(time);
+    let exp = new Date();
+    exp.setTime(exp.getTime() + parseInt(strsec));
     document.cookie =
-      name + '=' + escape(value) + ';expires=' + exp.toGMTString()
+      name + "=" + escape(value) + ";expires=" + exp.toGMTString();
   } else {
-    document.cookie = name + '=' + escape(value)
+    document.cookie = name + "=" + escape(value);
   }
-}
+};
 
 // 读 cookies
-export let getCookie = function(name) {
-  let reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
-  let arr = document.cookie.match(reg)
-  return arr ? unescape(arr[2]) : null
-}
+export let getCookie = function (name) {
+  let reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+  let arr = document.cookie.match(reg);
+  return arr ? unescape(arr[2]) : null;
+};
 
 // 删 cookies
-export let delCookie = function(name) {
-  var exp = new Date()
-  exp.setTime(exp.getTime() - 1)
-  var cval = getCookie(name)
+export let delCookie = function (name) {
+  var exp = new Date();
+  exp.setTime(exp.getTime() - 1);
+  var cval = getCookie(name);
   if (cval != null) {
-    document.cookie = name + '=' + cval + ';expires=' + exp.toGMTString()
+    document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
   }
-}
+};
 
 // 获取Token
-export let getToken = function() {
+export let getToken = function () {
   if (window.sessionStorage && window.sessionStorage.Bearer) {
-    return window.sessionStorage.Bearer
+    return window.sessionStorage.Bearer;
   } else if (window.localStorage && window.localStorage.Bearer) {
-    return window.localStorage.Bearer
+    return window.localStorage.Bearer;
   } else if (window.document.cookie) {
-    return getCookie('Bearer')
+    return getCookie("Bearer");
   }
-}
+};
 
 // 设置Token
-export let setToken = function(token, rememberTime) {
+export let setToken = function (token, rememberTime) {
   if (window.sessionStorage) {
-    window.sessionStorage.Bearer = token
+    window.sessionStorage.Bearer = token;
   }
 
   if ((rememberTime && window.localStorage) || !window.sessionStorage) {
-    window.localStorage.Bearer = token
+    window.localStorage.Bearer = token;
   }
 
   if (
@@ -251,27 +251,27 @@ export let setToken = function(token, rememberTime) {
     !window.localStorage
   ) {
     if (rememberTime) {
-      setCookie('Bearer', token, rememberTime)
+      setCookie("Bearer", token, rememberTime);
     } else {
-      setCookie('Bearer', token)
+      setCookie("Bearer", token);
     }
   }
-}
+};
 
 // 删除Token
-export let delToken = function() {
+export let delToken = function () {
   if (window.sessionStorage && window.sessionStorage.Bearer) {
-    window.sessionStorage.removeItem('Bearer')
+    window.sessionStorage.removeItem("Bearer");
   }
 
   if (window.localStorage && window.localStorage.Bearer) {
-    window.localStorage.removeItem('Bearer')
+    window.localStorage.removeItem("Bearer");
   }
 
   if (window.document.cookie) {
-    delCookie('Bearer')
+    delCookie("Bearer");
   }
-}
+};
 ```
 
 大概原理：
@@ -480,19 +480,19 @@ Vue.prototype.$request = request
 
 ```javascript
 $http({
-  method: 'post',
-  url: 'http://localhost:3000/xxx',
-  data: { para1: 'para1', para2: 'para2' },
+  method: "post",
+  url: "http://localhost:3000/xxx",
+  data: { para1: "para1", para2: "para2" },
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  }
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
 })
-  .success(function(data) {
+  .success(function (data) {
     // do something
   })
-  .error(function(data) {
+  .error(function (data) {
     // do something
-  })
+  });
 ```
 
 ### jQuery
@@ -500,71 +500,71 @@ $http({
 ```javascript
 $.ajax({
   cache: false,
-  type: 'POST',
-  url: 'http://localhost:3000/xxx',
+  type: "POST",
+  url: "http://localhost:3000/xxx",
   data: {
-    para1: para1
+    para1: para1,
   },
   async: false,
-  dataType: 'json',
-  success: function(result) {},
-  error: function(err) {
-    console.log(err)
-  }
-})
+  dataType: "json",
+  success: function (result) {},
+  error: function (err) {
+    console.log(err);
+  },
+});
 
 // 上传文件
 //创建FormData对象
-var data = new FormData()
+var data = new FormData();
 //为FormData对象添加数据
 //
-$.each($('#inputfile')[0].files, function(i, file) {
-  data.append('upload_file', file)
-})
+$.each($("#inputfile")[0].files, function (i, file) {
+  data.append("upload_file", file);
+});
 $.ajax({
-  url: 'http://127.0.0.1:3000/api/upload_oss_img_demo',
-  type: 'POST',
+  url: "http://127.0.0.1:3000/api/upload_oss_img_demo",
+  type: "POST",
   data: data,
   cache: false,
   contentType: false, //不可缺
   processData: false, //不可缺
-  success: function(data) {
-    console.log(data)
-    if (data.result == 'ok') {
-      $('#zzzz').attr('src', data.img_url)
+  success: function (data) {
+    console.log(data);
+    if (data.result == "ok") {
+      $("#zzzz").attr("src", data.img_url);
     }
-  }
-})
+  },
+});
 ```
 
 ### MUI
 
 ```javascript
 mui.ajax({
-  url: 'http://localhost:3000/xxx',
-  dataType: 'json',
-  success: function(data) {},
-  error: function(data) {
-    console.log('error!')
-  }
-})
+  url: "http://localhost:3000/xxx",
+  dataType: "json",
+  success: function (data) {},
+  error: function (data) {
+    console.log("error!");
+  },
+});
 ```
 
 ### JavaScript
 
 ```javascript
-var xhr = new XMLHttpRequest()
-xhr.open('POST', 'http://localhost:3000/xxx', true) //POST或GET，true（异步）或 false（同步）
-xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-xhr.withCredentials = true
-xhr.onreadystatechange = function() {
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "http://localhost:3000/xxx", true); //POST或GET，true（异步）或 false（同步）
+xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhr.withCredentials = true;
+xhr.onreadystatechange = function () {
   if ((obj.readyState == 4 && obj.status == 200) || obj.status == 304) {
-    var gotServices = JSON.parse(xhr.responseText)
+    var gotServices = JSON.parse(xhr.responseText);
   } else {
-    console.log('ajax失败了')
+    console.log("ajax失败了");
   }
-}
-xhr.send({ para1: para1 })
+};
+xhr.send({ para1: para1 });
 ```
 
 ### vue-resource
@@ -643,6 +643,10 @@ request.post('/api').form({key:'value'}), function(err,httpResponse,body){ /* ..
 删除 gulpfile.js 中的 lint、eslint_start 两个任务，并且把 default 改为“gulp.task('default', ['start']”。
 
 ## 更新说明
+
+_v1.0.4 2020 年 04 月 10 日 17:46:51_
+
+1. 升级依赖版本。
 
 _v1.0.3 2019 年 9 月 11 日 13:21:56_
 

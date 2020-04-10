@@ -22,5 +22,6 @@ module.exports = {
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': 0
-  }
+  },
+  
 }
